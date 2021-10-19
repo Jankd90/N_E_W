@@ -6,10 +6,15 @@ import router from './router'
 
 Vue.config.productionTip = false
 
-/* eslint-disable no-new */
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.min.css'
+import 'vue-material/dist/theme/default.css'
+
+Vue.use(VueMaterial)
+
 new Vue({
   el: '#app',
-  router,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  router
 })
