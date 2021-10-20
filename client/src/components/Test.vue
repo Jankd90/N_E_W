@@ -6,13 +6,10 @@
         <span class="md-title">N_E_W</span>
         
        <div class="md-toolbar-section-end">
-        <md-button class="md-icon-button">
-        <md-icon>filter_alt</md-icon>
+        <filter1/>
+        <login/>
         
-      </md-button>
-      <md-button class="md-icon-button">
-        <md-icon>login</md-icon>
-      </md-button>
+    
           </div>
 
    
@@ -26,11 +23,17 @@
          <card/>
          <card/>
          <card/>
+                  <card/>
+         <card/>
+         <card/>
+         <card/>
+         <card/>
+         <card/>
+         <card/>
+         <card/>
       </md-app-content>
     </md-app>
-    <md-button id="add" class="md-icon-button md-raised md-primary">
-        <md-icon>add</md-icon>
-      </md-button>
+    <add/>
   </div>
 </template>
 
@@ -45,11 +48,7 @@
     width: 230px;
     max-width: calc(100vw - 125px);
   }
-   #add{
-    position: absolute;
-    right: 1rem;
-    bottom: 1rem;
-  }
+ 
  .md-content{
    height: 100vh;
 
@@ -66,6 +65,7 @@
     margin: 4px;
     display: inline-block;
     vertical-align: top;
+    margin-bottom: 1rem;
   }
   .buttonbar{
     right: 0px;
@@ -83,10 +83,17 @@ export default {
 
 <script>
 import Card from '../components/Card'
+import Add from '../components/Add2'
+import Filter from '../components/Filter'
+import Login from '../components/Login'
 
 export default {
+  title: 'N_E_W Market',
   components: {
-    'card': Card
+    'card': Card,
+    'filter1': Filter,
+    'add': Add,
+    'login': Login
   }
 }
 </script>

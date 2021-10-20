@@ -13,7 +13,7 @@
         <md-card-actions md-alignment="space-between">
           <div>
             
-            <md-button>Go to application</md-button>
+            <md-button class="md-raised md-primary">Go to application</md-button>
           </div>
 
           <md-card-expand-trigger>
@@ -26,6 +26,7 @@
         <md-card-expand-content>
           <md-card-content>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.
+          <chip/>
           </md-card-content>
           
         </md-card-expand-content>
@@ -68,3 +69,14 @@
     vertical-align: top;
   }
 </style>
+
+<script>
+
+import Chip from '../components/Chip'
+
+export default {
+  components: {
+    'chip': Chip,
+  }
+}
+</script>
