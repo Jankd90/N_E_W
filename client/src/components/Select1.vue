@@ -30,12 +30,17 @@
 </template>
 
 <script>
+import store from '../store'
   export default {
     name: 'MultipleSelect',
-    data: () => ({
-      selectedLabels: []
-    })
-  }
+    computed: {
+      selectedLabels: {
+        get () {return store.state.filterval
+      },
+      set (val, oldVal) {
+        store.commit('addFilter', val);
+    }
+    }}}
 </script>
 <style scoped>
 .md-layout-item{

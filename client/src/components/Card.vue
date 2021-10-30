@@ -5,8 +5,8 @@
       </md-card-media>
 
       <md-card-header>
-        <div class="md-title">Smartwatch Engineer</div>
-        <div class="md-subhead">Programming, testing</div>
+        <div class="md-title">{{title}}</div>
+        <div class="md-subhead">{{subtitle}}</div>
       </md-card-header>
 
       <md-card-expand>
@@ -25,8 +25,12 @@
 
         <md-card-expand-content>
           <md-card-content>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio itaque ea, nostrum odio. Dolores, sed accusantium quasi non, voluptas eius illo quas, saepe voluptate pariatur in deleniti minus sint. Excepturi.
-          <chip/>
+            {{text}}
+            <br><br>
+            <div id="contain" v-for="index in labels" :key="index">
+            <chip :label="index"/>
+            
+            </div>
           </md-card-content>
           
         </md-card-expand-content>
@@ -68,6 +72,9 @@
     display: inline-block;
     vertical-align: top;
   }
+  #contain{
+    display: inline-block;
+  }
 </style>
 
 <script>
@@ -77,6 +84,17 @@ import Chip from '../components/Chip'
 export default {
   components: {
     'chip': Chip,
+  },
+  name: 'card',
+  props:{
+    UUID: String,
+    title: String,
+    subtitle:String,
+    text: String,
+    IMG_URL: String,
+    labels: Array,
+    contact: String,
   }
 }
+//UUID, Title, Subtitle, Text, IMG_URL, Labels, Contact, Start, Finish, Hours, Slots
 </script>

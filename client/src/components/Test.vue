@@ -15,22 +15,14 @@
    
       </md-app-toolbar>
       <md-app-content>
-         <card/>
-         <card/>
-         <card/>
-         <card/>
-         <card/>
-         <card/>
-         <card/>
-         <card/>
-                  <card/>
-         <card/>
-         <card/>
-         <card/>
-         <card/>
-         <card/>
-         <card/>
-         <card/>
+         
+  <div id="contain" v-for="index in posts" :key="index">
+  
+    <card :title="index.title" :subtitle="index.subtitle" :text="index.text" :labels="index.labels"/>
+  </div>
+         
+
+        
       </md-app-content>
     </md-app>
     <add/>
@@ -69,6 +61,9 @@
   .buttonbar{
     right: 0px;
   }
+  #contain{
+    display: inline-block;
+  }
 </style>
 
 <script>
@@ -85,14 +80,35 @@ import Card from '../components/Card'
 import Add from '../components/Add2'
 import Filter from '../components/Filter'
 import Login from '../components/Login'
+//import store from '../store'
+
 
 export default {
   title: 'N_E_W Market',
+  ////store,
+
+  computed: {
+    count () {
+      return this.$store.state.filterval
+      // Or return basket.getters.fruitsCount
+      // (depends on your design decisions).
+    },
+    posts () {
+      return this.$store.state.fiteredPosts
+      // Or return basket.getters.fruitsCount
+      // (depends on your design decisions).
+    }
+  },
   components: {
     'card': Card,
     'filter1': Filter,
     'add': Add,
     'login': Login
+  },
+  watch: {
+    count (newCount, oldCount) {
+      console.log(console.log(this.$store.state.fiteredPosts))
+    }
   }
 }
 </script>

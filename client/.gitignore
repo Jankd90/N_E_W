@@ -9,7 +9,7 @@ yarn-error.log*
 selenium-debug.log
 server/images/
 server/N_E_W.db
-server/N_E_W/
+server/N_E_W/*
 # Editor directories and files
 .idea
 .vscode

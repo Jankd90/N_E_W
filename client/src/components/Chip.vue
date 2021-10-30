@@ -1,14 +1,15 @@
 <template>
   <div>
-    <md-chip class="md-primary">Machine Learning</md-chip>
-<md-chip class="md-primary">Software</md-chip>
-<md-chip class="md-primary">Hardware</md-chip>
+    <md-chip class="md-primary">{{label}}</md-chip>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'SingleChip'
+  name: 'SingleChip',
+  props:{
+    label: String
+  }
 }
 </script>
 <style scoped>

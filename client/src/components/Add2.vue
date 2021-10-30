@@ -10,7 +10,8 @@
            
     <md-field>
       <label>Upload image</label>
-      <md-file v-model="single" />
+      <md-file v-model="single" @change="uploadImage($event)"/>
+
     </md-field>
 
                <md-field>
@@ -25,7 +26,7 @@
 
     <md-field>
       <label>Textarea</label>
-      <md-textarea v-model="textarea"></md-textarea>
+      <md-textarea v-model="text"></md-textarea>
     </md-field>
 
            </md-tab>
@@ -40,7 +41,7 @@
           <p>We're almost there! lets fill in some organizational stuff so that the right amound of people can find the project at the right time.</p>
          <organize/>
                <md-dialog-actions>
-         <md-button class="md-primary" @click="showDialog = false; sayHello()">Done</md-button>
+         <md-button class="md-primary" @click="showDialog = false; uploadProject()">Done</md-button>
       
       </md-dialog-actions>
          </md-tab>
@@ -53,8 +54,10 @@
         
         <md-icon>add</md-icon>
       </md-button>
-
-      
+ <md-button id="add2"  @click="getPost" class="md-icon-button md-raised md-primary">
+        
+        <md-icon>add</md-icon>
+      </md-button>
   </div>
 </template>
 
@@ -65,21 +68,53 @@
 <script>
 import Organize from '../components/Organize'
 import Selectlabels from '../components/Select1'
+import axios from 'axios'
+import store from '../store'
 
-
+let IMG_URL,start, finish, hours, slots;
   export default {
     name: 'DialogCustom',
     data: () => ({
-      showDialog: false
+      showDialog: false,
+      title: '', subtitle : '', text : '', start, finish ,contact : '',hours, slots,
     }),
     components: {
     'selectlabels': Selectlabels,
     'organize': Organize
   },
+  watch: {
+    title (value) {
+      //title = value;
+      console.log(value);
+    }
+  },
+
   methods: {
     sayHello(){
-      console.log(this.$store.state.a);
+      alert('aaaaa');
+      console.log(single);
+    },
+    getPost(){
+      store.commit('getPosts');
     }
+    ,
+    uploadProject(){
+       let data = new FormData();
+       const json = JSON.stringify({ title : this.title, subtitle : this.subtitle, 
+       text : this.text, labels : this.$store.state.filterval, 
+       start : this.start, finish : this.finish,
+       contact : this.contact, hours : this.hours, slots : this.slots });
+       data.append('name', 'my-picture');
+       data.append('file', this.IMG_URL); 
+       data.append('json', json); 
+       store.commit('postProject', data);
+    }
+    ,
+    uploadImage(event) {
+      this.IMG_URL = event.target.files[0];
+   
+      
+  }
   }
   }
 </script>
