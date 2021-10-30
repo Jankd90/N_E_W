@@ -63,8 +63,9 @@
 
 
 <script>
-import Selectlabels from '../components/Selectlabels'
 import Organize from '../components/Organize'
+import Selectlabels from '../components/Select1'
+
 
   export default {
     name: 'DialogCustom',

@@ -60,7 +60,6 @@
     border: 1px solid rgba(#000, .12);
   }
 
-   // Demo purposes only
  .md-app-content{
    width: 100%;
     height: 100%;
