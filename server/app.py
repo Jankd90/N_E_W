@@ -9,6 +9,8 @@ import json
 import os
 DATABASE = 'N_E_W.db'
 
+
+
 app = flask.Flask(__name__)
 CORS(app)
 app.config["DEBUG"] = True
@@ -37,18 +39,24 @@ def upload_IMG():
     f = request.form['json']
     file = request.files['file']
     data = json.loads(f)
-    print(data)
+    UUID = str(uuid.uuid4())
+    #print(data)
     filename = secure_filename(file.filename)
     #print(os.path.join("images/", filename))
-    file.save(os.path.join("images/", filename))
+    file.save(os.path.join("images/", UUID + '.' + filename.split('.')[-1]))
     db = sqlite3.connect(DATABASE)
     cur = db.cursor()
+    print(data['labels'])
+    labels = ''
+    for label in data['labels']:
+            labels = labels + label + ','
+    labels = labels[:-1]
     dumper = "INSERT INTO Projects VALUES ('{}','{}',\
         '{}','{}','images/bangle-leaf.jpg',\
-            'machine learning,software,hardware','jan@N_E_W.nl',\
-                '01-09-2021', '01-12-2021', 10, 10)".format(str(uuid.uuid4()),data['title'],
-                data['subtitle'],data['text'])
-    print(dumper)
+            '{}','jan@N_E_W.nl',\
+                '01-09-2021', '01-12-2021', 10, 10)".format(UUID,data['title'],
+                data['subtitle'],data['text'],labels)
+    #print(dumper)
     cur.execute(dumper)
     db.commit()
     db.close()
@@ -90,7 +98,7 @@ def test():
         'Programming, testing','testtesttest','images/bangle-leaf.jpg',\
             'machine learning,software,hardware','jan@N_E_W.nl',\
                 '01-09-2021', '01-12-2021', 10, 10)".format(str(uuid.uuid4()))
-    print(dumper)
+    #print(dumper)
     cur.execute(dumper)
     
     db.commit()
@@ -109,14 +117,14 @@ def test2():
         for x,y in zip(dataModel, row):
             if x == 'labels':
                 y = y.split(',')
-                print('okeee')
+                #print('okeee')
             ab[x] = y
         f.append(ab)
     db.commit()
     db.close()
-    print(row)
-    print(dataModel)
-    print(f)
+    #print(row)
+    #print(dataModel)
+    #print(f)
     return jsonify(f)
 
 @app.route('/api/v1/resources/books/all', methods=['GET'])

@@ -18,17 +18,29 @@ function getArraysIntersection(a1,a2){
   return  a1.filter(function(n) { return a2.indexOf(n) !== -1;});
 }
 
+function getposts(state) {
+  axios.get('http://127.0.0.1:5000/api/get').then(
+    response => {
+      state.posts = response.data;
+      state.fiteredPosts = response.data;
+    }
+  )      
+}
+
+
+
 export default new Vuex.Store({
- state: {a:'b', filterval: [], count: 3, posts: pr, fiteredPosts: pr, selectedLabels: []},
+ state: {a:'b', filterval: [], count: 3, posts: [], fiteredPosts: [], selectedLabels: []},
  projects: pr,
  filterval: ['blabla'],
  mutations: {
   addFilter (state, ls) {
       // mutate state
       state.filterval = ls; 
-      state.count++;
+      console.log(ls);
+      console.log(state.posts);
       if(state.filterval.length == 0){
-        state.fiteredPosts = pr;
+        state.fiteredPosts = state.posts;
       }
       else{
       state.fiteredPosts = state.posts.filter((function (currentElement) {
@@ -39,11 +51,7 @@ export default new Vuex.Store({
       
     }},
     getPosts(state) {
-      axios.get('http://127.0.0.1:5000/api/get').then(
-        response => {
-          state.fiteredPosts = response.data;
-        }
-      )      
+      getposts(state);    
     },
     postProject(state, data) {
     const URL = 'http://127.0.0.1:5000/api/upload'; 
@@ -58,7 +66,11 @@ export default new Vuex.Store({
       config
     ).then(
       response => {
-        console.log('image upload response > ', response)
+        console.log('image upload response > ', response);
+        //setInterval(function() {getposts(state)},3000);
+        setTimeout(function(){
+          getposts(state); 
+       }, 1000);
       }
     )
     }

@@ -81,7 +81,7 @@ import Add from '../components/Add2'
 import Filter from '../components/Filter'
 import Login from '../components/Login'
 //import store from '../store'
-
+import { onMounted } from 'vue'
 
 export default {
   title: 'N_E_W Market',
@@ -109,6 +109,10 @@ export default {
     count (newCount, oldCount) {
       console.log(console.log(this.$store.state.fiteredPosts))
     }
-  }
+  },
+  mounted() {             
+         this.$store.commit('getPosts');
+      }
+  
 }
 </script>

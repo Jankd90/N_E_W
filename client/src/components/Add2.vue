@@ -54,10 +54,10 @@
         
         <md-icon>add</md-icon>
       </md-button>
- <md-button id="add2"  @click="getPost" class="md-icon-button md-raised md-primary">
+ <!-- <md-button id="add2"  @click="getPost" class="md-icon-button md-raised md-primary">
         
         <md-icon>add</md-icon>
-      </md-button>
+      </md-button> -->
   </div>
 </template>
 
